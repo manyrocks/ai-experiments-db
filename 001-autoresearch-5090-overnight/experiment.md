@@ -39,6 +39,18 @@ Running autoresearch on an RTX 5090 required several workarounds not documented 
 
 **147 experiments** over ~10 hours. Val_bpb improved from **1.089** (baseline) to **1.028** (best), a **5.6% reduction**. 19 changes were kept, 127 discarded, 1 crashed. See `summary.md` for the full experiment log, progression of kept improvements, detailed analysis of what worked and what didn't, and the final best configuration.
 
+## What I Learned
+
+**This experiment didn't produce a usable LLM.** It produced an optimized *training recipe* — a `best_train.py` tuned specifically for the RTX 5090 without Flash Attention 3. That recipe doesn't exist anywhere else. If I (or anyone with a 5090) wanted to train a nanochat model, this file is the fastest path to a good result on this hardware.
+
+**Where this sits in the LLM creation pipeline:** Autoresearch optimizes step 1 (find the best training config). The nanochat speedrun is step 2 (actually train a model using that config). Then SFT and RL turn the base model into something you can chat with. Autoresearch finds the recipe; you still have to bake the bread.
+
+**Baking analogy that made it click:** The original autoresearch repo is a cake recipe written for a 9" round pan (H100). My 5090 is a 6"x6" square pan — different shape, different material, different heat distribution. The fundamentals are the same (flour, sugar, eggs / gradients, attention, backpropagation), but the specifics that make it come out right are different. Some things transferred fine (core architecture stayed at depth 8), but the temperatures and timings all changed (batch sizes, learning rates, compilation settings). One key ingredient didn't even work in the new pan (Flash Attention 3), so the agent found a substitute (SDPA) and re-optimized everything around it. And autoresearch didn't adapt the recipe once — it baked 147 cakes overnight, tweaking one thing each time, tasting the result, keeping or tossing the change.
+
+**The counterintuitive finding:** When you only have 5 minutes to train, a small model trained well beats a big model trained poorly. The agent tried going bigger multiple times and it always lost, because fewer training steps mattered more than model capacity. This is a real ML principle (compute-optimal scaling / "Chinchilla" research) that the agent independently rediscovered.
+
+**Most ideas don't work, and that's normal.** 127 of 147 experiments were discarded. Only 13% improved things. The value isn't any single experiment — it's systematic elimination of bad ideas and accumulation of small wins. The architecture never changed; all gains came from "boring" stuff like optimizer tuning and batch sizing.
+
 ## Files
 
 | File | Description |

@@ -92,6 +92,10 @@ Create `experiment.md` inside the folder using the template below. Interview the
 
 {The insights. What was learned? What was surprising? What confirmed expectations?}
 
+## What I Learned
+
+{Personal takeaways in plain language. This section is for future-you, not for a journal. Explain what clicked, what was confusing, what analogy helped it make sense. If this experiment changed how you think about something, capture that here. Don't just restate the metrics — explain what they mean and why they matter.}
+
 ## Files in This Folder
 
 | File | Description |
@@ -111,6 +115,7 @@ Create `experiment.md` inside the folder using the template below. Interview the
 - **Link to prior experiments.** If this is a continuation, reference the folder number: "Follows up on [001](../001-autoresearch-5090-overnight/)".
 - **Include reproduction steps.** Someone (probably future-you) should be able to rerun this.
 - **Document failures and dead ends.** An experiment that shows something doesn't work is still valuable.
+- **Write the "What I Learned" section in plain language.** Use analogies, explain what clicked, capture the aha moment. This section is the most valuable part for future reference — the metrics will mean nothing in 6 months without context for why they mattered.
 - **Keep the file manifest current.** Every file in the folder should be listed and described.
 
 ## Handling Supporting Files
