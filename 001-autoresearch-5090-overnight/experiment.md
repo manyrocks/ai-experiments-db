@@ -3,7 +3,7 @@
 **Date:** March 10–11, 2026
 **Type:** Autonomous AI-driven LLM training research
 **Duration:** ~10 hours overnight
-**Cost:** ~$4–5 RunPod GPU rental + Claude Max subscription for agent loop
+**Cost:** $12.66 RunPod GPU rental ($9.89 GPU + $0.16 storage on 3/10, $2.57 GPU + $0.04 storage on 3/9 for setup/testing) + Claude Max subscription for agent loop
 
 ## Background
 
@@ -59,6 +59,7 @@ Running autoresearch on an RTX 5090 required several workarounds not documented 
 | `summary.md` | The agent's detailed technical report: all 147 experiments, best config, key insights, what worked/didn't, full experiment log |
 | `results.tsv` | Machine-readable log: commit hash, val_bpb, VRAM, keep/discard, description for every experiment |
 | `best_train.py` | The final optimized `train.py` with all winning changes applied (5090/SDPA-compatible) |
+| `runpod-billing.png` | RunPod billing screenshot for cost verification |
 
 ## What to Try Next
 
